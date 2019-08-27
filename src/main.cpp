@@ -1,6 +1,14 @@
+#include <GL/glew.h>
+#include <GL/glut.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
 
-int main(void)
+using namespace std;
+
+int screenWidth = 960;  // Width of screen window in pixels
+int screenHeight = 640; // Height of screen window in pixels
+
+int main(int argc, char *argv[])
 {
   GLFWwindow *window;
 
@@ -18,6 +26,15 @@ int main(void)
 
   /* Make the window's context current */
   glfwMakeContextCurrent(window);
+
+  /* Initial GLEW */
+  glutInit(&argc, argv);
+  GLenum err = glewInit();
+  if (GLEW_OK != err)
+  {
+    /* Problem: glewInit failed, something is seriously wrong. */
+    fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+  }
 
   /* Loop until the user closes the window */
   while (!glfwWindowShouldClose(window))
